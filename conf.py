@@ -37,6 +37,7 @@ html_favicon = 'tinkerer.ico'
 
 # Pick another Tinkerer theme or use your own
 html_theme = "flat"
+# html_theme_path = [tinkerer.paths.themes, 'themes']
 
 # Theme-specific options, see docs
 html_theme_options = { }
