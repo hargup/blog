@@ -34,6 +34,33 @@ at their offical documentation.
 
 .. image:: circle.png
 
+Here is an Euler curve.
+
+.. code-block:: python
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sympy import *
+    from sympy.mpmath import *
+
+    def x(t):
+        f = lambda x: cos(x*x) 
+        g = lambda t: float(quad(f, [0, t]))
+        return map(g, t)
+
+    def y(t):
+        f = lambda x: sin(x*x) 
+        g = lambda t: float(quad(f, [0, t]))
+        return map(g, t)
+
+    t = np.arange(-3.8, 3.8, 0.05)
+
+    plt.plot(x(t),y(t))
+    plt.axis([-2,2,-2,2])
+    plt.show()
+
+.. image:: euler.png
+
 .. code-block:: python
 
     import numpy as np
