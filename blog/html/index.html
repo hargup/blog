@@ -62,6 +62,40 @@
                 </li>
               </ul>
           </nav><div class="main-container"><div class="main wrapper clearfix"><article><div class="timestamp postmeta">
+            <span>September 21, 2013</span>
+        </div>
+        <div class="section" id="code-browsing-with-vim">
+<h1><a href="2013/09/21/code_browsing_with_vim.html">code browsing with vim</a></h1>
+<p>I use vim as my primary editor and I love it. I quite frequently have moments
+when I say to myself “Wow! I didn’t know I can also do this in vim”. One such thing
+I recently discovered is the usage of ctags with vim.
+ctags is a program which generate tag files for programs. The tag files lets us
+jump
+to different sections of code very fast.
+When I was working on visual studio during my intern I particularly liked the
+“Go To Definition” feature on right click, which is very useful while reading
+a long code file. With ctags and vim I can do the same in a more efficient manner.
+Add this line to your <cite>~/.vimrc</cite> and it will generate tag file everytime you save your code</p>
+<p><cite>au BufWritePost *.c,*.cpp,*.h,*py silent! !ctags -R –fields=+l &amp;</cite></p>
+<p>Then use &lt;C-]&gt; to go to the tag of your cursor is present and &lt;C-T&gt; to go back
+to the
+place you came from.</p>
+<p>Type <cite>:help tag</cite> in normal mode for more information on tags.</p>
+<p>Happy Vimming :)</p>
+</div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Harsh Gupta</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/vim.html">vim</a>, <a href="tags/ctags.html">ctags</a></span>
+        </div>
+        <div class="comments">
+            <a href="http://hargup.github.io/blog/2013/09/21/code_browsing_with_vim.html#disqus_thread" data-disqus-identifier="2013/09/21/code_browsing_with_vim">Leave a comment</a>
+        </div></div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>September 09, 2013</span>
         </div>
         <div class="section" id="plotting-parametric-and-polar-functions-with-python">
@@ -199,6 +233,8 @@ and mysql.</p>
     </div></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2013/09/21/code_browsing_with_vim.html">code browsing with vim</a>
+        </li><li>
             <a href="2013/09/09/plotting_graphs_with_python.html">Plotting parametric and polar functions with Python</a>
         </li><li>
             <a href="2013/08/30/case_for_static_websites.html">Case for static websites</a>
