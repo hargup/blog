@@ -11,7 +11,7 @@ import tinkerer.paths
 project = 'Harsh\'s Blog'
 
 # Change this to the tagline of your blog
-tagline = 'Harsh Gupta\' Blog'
+tagline = ''
 
 # Change this to the description of your blog
 description = ''
@@ -20,7 +20,7 @@ description = ''
 author = 'Harsh Gupta'
 
 # Change this to your copyright string
-copyright = '1984, ' + author
+copyright = "None"
 
 # Change this to your blog root URL (required for RSS feed)
 website = 'http://hargup.github.io/blog/'

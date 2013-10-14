@@ -17,9 +17,9 @@ Static websites have a lot of advantages over dynamic websites
 
 1. Static websites are easier of create.
 
-    With a lot of free (as in free speech) static websites creators available
-    online we can create good looking static websites with reasonable amount of
-    control. 
+   With a lot of free (as in free speech) static websites creators available
+   online we can create good looking static websites with reasonable amount of
+   control. 
 
 2. Static websites are safer.
 
