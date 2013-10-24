@@ -28,6 +28,8 @@ programs to control it in crazy ways. One can be to make you laptop blink.
     brightness_file.write(str(max_brightness))
 
 Run the program with root permision, with parameter as the blinking time.
+
+
 .. author:: Harsh Gupta 
 .. categories:: linux 
 .. tags:: linux 
