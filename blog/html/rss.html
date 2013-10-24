@@ -5,8 +5,47 @@
         <link>http://hargup.github.io/blog/</link>
         <description></description>
         <language>en-us</language>
-        <pubDate>Mon, 14 Oct 2013 00:00:00 +0530</pubDate>
+        <pubDate>Thu, 24 Oct 2013 00:00:00 +0530</pubDate>
         
+        <item>
+            <link>http://hargup.github.io/blog/2013/10/24/make_your_laptop_blink.html</link>
+            <guid>http://hargup.github.io/blog/2013/10/24/make_your_laptop_blink.html</guid>
+            <title><![CDATA[Make your Laptop blink]]></title>
+            <description><![CDATA[<div class="section" id="make-your-laptop-blink">
+<h1>Make your Laptop blink</h1>
+<p>My year was searching for ways to change the brigtness of my laptop using cli.
+And I found out that file <cite>/sys/class/backlight/intel_backlight/brightness</cite> on
+system controls the brightness, so you can either edit it manually or write
+programs to control it in crazy ways. One can be to make you laptop blink.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">max_brightness_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/sys/class/backlight/intel_backlight/max_brightness&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">max_brightness</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_brightness_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="n">max_brightness</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">running_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">running_time</span><span class="p">:</span>
+    <span class="n">brightness_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/sys/class/backlight/intel_backlight/brightness&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">max_brightness</span>
+    <span class="n">brightness_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">brightness_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">brightness_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/sys/class/backlight/intel_backlight/brightness&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">brightness_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">max_brightness</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Run the program with root permision, with parameter as the blinking time.
+.. author:: Harsh Gupta
+.. categories:: linux
+.. tags:: linux
+.. comments:</p>
+</div>]]></description>
+             <pubDate>Thu, 24 Oct 2013 00:00:00 +0530</pubDate>
+        </item>
+    
         <item>
             <link>http://hargup.github.io/blog/2013/10/14/i_m_overwhelmed.html</link>
             <guid>http://hargup.github.io/blog/2013/10/14/i_m_overwhelmed.html</guid>

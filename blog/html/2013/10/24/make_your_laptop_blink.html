@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-        <title>code browsing with vim &mdash; Harsh&#39;s Blog</title>
+        <title>Make your Laptop blink &mdash; Harsh&#39;s Blog</title>
             <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="Plotting parametric and polar functions with Python" href="../09/plotting_graphs_with_python.html" /><link rel="prev" title="I’m overwhelmed" href="../../10/14/i_m_overwhelmed.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="I’m overwhelmed" href="../14/i_m_overwhelmed.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.2.1',
@@ -62,51 +62,58 @@
                 </li>
               </ul>
           </nav><div class="main-container"><div class="main wrapper clearfix"><article><div class="timestamp postmeta">
-            <span>September 21, 2013</span>
+            <span>October 24, 2013</span>
         </div>
-    <div class="section" id="code-browsing-with-vim">
-<h1>code browsing with vim</h1>
-<p>I use vim as my primary editor and I love it. I quite frequently have moments
-when I say to myself &#8220;Wow! I didn&#8217;t know I can also do this in vim&#8221;. One such thing
-I recently discovered is the usage of ctags with vim.
-ctags is a program which generate tag files for programs. The tag files lets us
-jump
-to different sections of code very fast.
-When I was working on visual studio during my intern I particularly liked the
-&#8220;Go To Definition&#8221; feature on right click, which is very useful while reading
-a long code file. With ctags and vim I can do the same in a more efficient manner.
-Add this line to your <cite>~/.vimrc</cite> and it will generate tag file everytime you save your code</p>
-<p><cite>au BufWritePost *.c,*.cpp,*.h,*py silent! !ctags -R &#8211;fields=+l &amp;</cite></p>
-<p>Then use &lt;C-]&gt; to go to the tag of your cursor is present and &lt;C-T&gt; to go back
-to the
-place you came from.</p>
-<p>Type <cite>:help tag</cite> in normal mode for more information on tags.</p>
-<p>Happy Vimming :)</p>
+    <div class="section" id="make-your-laptop-blink">
+<h1>Make your Laptop blink</h1>
+<p>My year was searching for ways to change the brigtness of my laptop using cli.
+And I found out that file <cite>/sys/class/backlight/intel_backlight/brightness</cite> on
+system controls the brightness, so you can either edit it manually or write
+programs to control it in crazy ways. One can be to make you laptop blink.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">max_brightness_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/sys/class/backlight/intel_backlight/max_brightness&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">max_brightness</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_brightness_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="n">max_brightness</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">running_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">running_time</span><span class="p">:</span>
+    <span class="n">brightness_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/sys/class/backlight/intel_backlight/brightness&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">max_brightness</span>
+    <span class="n">brightness_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">brightness_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">brightness_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/sys/class/backlight/intel_backlight/brightness&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">brightness_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">max_brightness</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Run the program with root permision, with parameter as the blinking time.
+.. author:: Harsh Gupta
+.. categories:: linux
+.. tags:: linux
+.. comments:</p>
 </div>
 
     <div class="postmeta">
-        <div class="author">
-            <span>Posted by Harsh Gupta</span>
-        </div>
         
-        <div class="tags">
-            <span>
-                Tags:
-                <a href="../../../tags/vim.html">vim</a>, <a href="../../../tags/ctags.html">ctags</a></span>
-        </div>
+        
+        
         </div><ul class="related clearfix">
-            <li class="left"> &laquo; <a href="../../10/14/i_m_overwhelmed.html">I&#8217;m overwhelmed</a></li>
-            <li class="right"><a href="../09/plotting_graphs_with_python.html">Plotting parametric and polar functions with Python</a> &raquo; </li>
-        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "hargup";    var disqus_identifier = "2013/09/21/code_browsing_with_vim";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
+            <li class="left"></li>
+            <li class="right"><a href="../14/i_m_overwhelmed.html">I&#8217;m overwhelmed</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
-            <a href="../../10/24/make_your_laptop_blink.html">Make your Laptop blink</a>
+            <a href="#">Make your Laptop blink</a>
         </li><li>
-            <a href="../../10/14/i_m_overwhelmed.html">I'm overwhelmed</a>
+            <a href="../14/i_m_overwhelmed.html">I'm overwhelmed</a>
         </li><li>
-            <a href="#">code browsing with vim</a>
+            <a href="../../09/21/code_browsing_with_vim.html">code browsing with vim</a>
         </li><li>
-            <a href="../09/plotting_graphs_with_python.html">Plotting parametric and polar functions with Python</a>
+            <a href="../../09/09/plotting_graphs_with_python.html">Plotting parametric and polar functions with Python</a>
         </li><li>
             <a href="../../08/30/case_for_static_websites.html">Case for static websites</a>
         </li></ul>
@@ -121,7 +128,7 @@ place you came from.</p>
 
         <div class="footer-container"><footer class="wrapper">&copy; Copyright None. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
 
-      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+      </div> <!--! end of #container --><script type="text/javascript">    var disqus_shortname = "hargup";    disqus_count();</script><!--[if lt IE 7 ]>
           <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
           <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
         <![endif]-->
