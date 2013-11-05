@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2013/10/30/the_problem_with_knowing_a_little
    2013/10/24/make_your_laptop_blink
    2013/10/14/i_m_overwhelmed
    2013/09/21/code_browsing_with_vim
