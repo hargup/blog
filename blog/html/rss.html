@@ -5,8 +5,62 @@
         <link>http://hargup.github.io/blog/</link>
         <description></description>
         <language>en-us</language>
-        <pubDate>Wed, 30 Oct 2013 00:00:00 +0530</pubDate>
+        <pubDate>Wed, 13 Nov 2013 00:00:00 +0530</pubDate>
         
+        <item>
+            <link>http://hargup.github.io/blog/2013/11/13/create_your_twin_brothers.html</link>
+            <guid>http://hargup.github.io/blog/2013/11/13/create_your_twin_brothers.html</guid>
+            <title><![CDATA[create your twin brothers]]></title>
+            <description><![CDATA[<div class="section" id="create-your-twin-brothers">
+<h1>create your twin brothers</h1>
+<p>Create photos with 3 you :P. Here’s the code and the results.
+Take 3 photos of you with same background but when you are in
+a different possition.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">far_away</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">b</span>
+
+<span class="n">I</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">]</span>
+<span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;Image1.jpg&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;Image2.jpg&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;Image3.jpg&quot;</span><span class="p">)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">far_away</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">])</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;result&quot;</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">&quot;Merged.jpg&quot;</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../../_images/Image1.jpg" src="http://hargup.github.io/blog/_images/Image1.jpg"/>
+<p>First Image</p>
+<img alt="../../../_images/Image2.jpg" src="http://hargup.github.io/blog/_images/Image2.jpg"/>
+<p>Second Image</p>
+<img alt="../../../_images/Image3.jpg" src="http://hargup.github.io/blog/_images/Image3.jpg"/>
+<p>Third Image</p>
+<img alt="../../../_images/Merged.jpg" src="http://hargup.github.io/blog/_images/Merged.jpg"/>
+<p>Result</p>
+</div>]]></description>
+             <pubDate>Wed, 13 Nov 2013 00:00:00 +0530</pubDate>
+        </item>
+    
         <item>
             <link>http://hargup.github.io/blog/2013/10/30/the_problem_with_knowing_a_little.html</link>
             <guid>http://hargup.github.io/blog/2013/10/30/the_problem_with_knowing_a_little.html</guid>
