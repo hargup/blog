@@ -3,7 +3,11 @@ create your twin brothers
 
 Create photos with 3 you :P. Here's the code and the results.
 Take 3 photos of you with same background but when you are in
-a different possition.
+a different possition. Here for every pixel in the three images it
+chooses the value of the RGB is with is farthest away from the other two.
+Well you cannot do it easily with 2 images
+because I don't see any naive way to distinguish between you and background
+with only two images.
 
 .. code-block:: python
 

@@ -15,7 +15,11 @@
 <h1>create your twin brothers</h1>
 <p>Create photos with 3 you :P. Here’s the code and the results.
 Take 3 photos of you with same background but when you are in
-a different possition.</p>
+a different possition. Here for every pixel in the three images it
+chooses the value of the RGB is with is farthest away from the other two.
+Well you cannot do it easily with 2 images
+because I don’t see any naive way to distinguish between you and background
+with only two images.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
