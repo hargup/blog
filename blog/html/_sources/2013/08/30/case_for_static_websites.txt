@@ -5,21 +5,25 @@ Case for static websites
 
 .. author:: default
 .. categories:: none
-.. tags:: javascript, html, sphinx, security 
+.. tags:: javascript, html, sphinx, security
 .. comments::
 
 From the last few days I've been trying out tinkerer and sphinx to create
-static websites and they are pretty good. While working I get a feeling that
-many times people do an overkill making dynamic websites with php or Ruby on
-Rails because they simply don't need an dynamic websites. By dynamic websites
+static websites. While working I get a feeling that
+many times people do an overkill making dynamic websites with php or Python.
+.. It is an overkill because
+.. I guess here I need to explain why it is I
+By dynamic websites
 I mean the websites which create the content from the data on the database
+and there is a server running in the backend which creates the content on the
+go.
 Static websites have a lot of advantages over dynamic websites
 
 1. Static websites are easier of create.
 
    With a lot of free (as in free speech) static websites creators available
    online we can create good looking static websites with reasonable amount of
-   control. 
+   control, with a lot less work.
 
 2. Static websites are safer.
 
@@ -27,10 +31,10 @@ Static websites have a lot of advantages over dynamic websites
    simply no scope of changing the content of the website with most of the
    attack strategies.
 
-3. Static websites are cheaper and easier to maintain. 
+3. Static websites are cheaper and easier to maintain.
 
    You can get your static website hosted for zero or very little cost as I'm
    doing for my blog. No one will let you do this for a website running on php
    and mysql.
 
-4. Because you might not need to create content dynamically.
+.. 4. Because you might not need to create content dynamically.
