@@ -5,8 +5,85 @@
         <link>http://hargup.github.io/blog/</link>
         <description></description>
         <language>en-us</language>
-        <pubDate>Mon, 02 Dec 2013 00:00:00 +0530</pubDate>
+        <pubDate>Mon, 09 Dec 2013 00:00:00 +0530</pubDate>
         
+        <item>
+            <link>http://hargup.github.io/blog/2013/12/09/harris_corner_detection.html</link>
+            <guid>http://hargup.github.io/blog/2013/12/09/harris_corner_detection.html</guid>
+            <title><![CDATA[Harris Corner Detection]]></title>
+            <description><![CDATA[<div class="section" id="harris-corner-detection">
+<h1>Harris Corner Detection</h1>
+<p>This is the implementation of the python implementation of the Harris corner
+detection algorithm from the book <em>Feature Extraction and Image Processing</em> by
+Mark Nixon and Alberto Aguado. The function is also available in opencv2 as <cite>cv2.cornerHarris()</cite>. I’m too lazy to explain the math now. Maybe next time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">harris</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">Mx</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">ksize</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+    <span class="n">My</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="n">ksize</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="c"># computer gradient magnitude of with points that are local maximas</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">edges</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Mx</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">My</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">M</span><span class="o">.</span><span class="n">itemset</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">mag</span><span class="p">)</span>
+
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">4</span> <span class="c">#Window size = 2*w + 1</span>
+    <span class="c"># k = 0.001</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">outimg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="n">w</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">cols</span><span class="o">-</span><span class="n">w</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">M</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">A</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">B</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">C</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">w</span><span class="p">,</span> <span class="n">w</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">w</span><span class="p">,</span> <span class="n">w</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">A</span> <span class="o">+=</span> <span class="n">Mx</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+                        <span class="n">B</span> <span class="o">+=</span> <span class="n">My</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+                        <span class="n">C</span> <span class="o">+=</span> <span class="n">Mx</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="n">My</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">j</span><span class="p">)</span>
+
+                <span class="n">val</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">B</span> <span class="o">-</span> <span class="n">C</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+                <span class="k">print</span> <span class="n">val</span>
+                <span class="n">outimg</span><span class="o">.</span><span class="n">itemset</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outimg</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;./checkboard.png&quot;</span><span class="p">)</span>
+<span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+<span class="n">dst</span> <span class="o">=</span> <span class="n">harris</span><span class="p">(</span><span class="n">gray</span><span class="p">)</span>
+
+<span class="n">dst</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="n">img</span><span class="p">[</span><span class="n">dst</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="o">*</span><span class="n">dst</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">]</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">&quot;checkboard_corner.png&quot;</span><span class="p">,</span><span class="n">img</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;img marked&quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A checkboard</p>
+<img alt="../../../_images/checkboard.png" src="http://hargup.github.io/blog/_images/checkboard.png"/>
+<p>The checkboard with corners marked</p>
+<img alt="../../../_images/checkboard_corner.png" src="http://hargup.github.io/blog/_images/checkboard_corner.png"/>
+</div>]]></description>
+             <pubDate>Mon, 09 Dec 2013 00:00:00 +0530</pubDate>
+        </item>
+    
         <item>
             <link>http://hargup.github.io/blog/2013/12/02/show_git_branch_in_bash_prompt.html</link>
             <guid>http://hargup.github.io/blog/2013/12/02/show_git_branch_in_bash_prompt.html</guid>
