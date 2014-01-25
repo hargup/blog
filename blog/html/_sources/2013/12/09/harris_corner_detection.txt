@@ -3,7 +3,10 @@ Harris Corner Detection
 
 This is the implementation of the python implementation of the Harris corner
 detection algorithm from the book *Feature Extraction and Image Processing* by
-Mark Nixon and Alberto Aguado. The function is also available in opencv2 as `cv2.cornerHarris()`. I'm too lazy to explain the math now. Maybe next time.
+Mark Nixon and Alberto Aguado. Or bluntly said it is an python translation of
+the given matlab code :P.
+The function is also available in opencv2 as `cv2.cornerHarris()`.
+I'm too lazy to explain the math now. Maybe next time.
 
 .. code-block:: python
 

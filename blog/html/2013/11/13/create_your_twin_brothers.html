@@ -31,7 +31,7 @@
         <link rel="next" title="The Problem with knowing a little" href="../../10/30/the_problem_with_knowing_a_little.html" /><link rel="prev" title="Show git branch in bash prompt" href="../../12/02/show_git_branch_in_bash_prompt.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '1.2.1',
+        VERSION:     '1.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -68,49 +68,41 @@
 <h1>Create Your Twin Brothers</h1>
 <p>Here&#8217;s how to create photos with 3 you.
 Take 3 photos of you with same background
-in different positions.
-.. code-block:: python</p>
-<blockquote>
-<div><p>import cv2
-import numpy as np</p>
-<dl class="docutils">
-<dt>def far_away(a,b,c):</dt>
-<dd><p class="first">A = int(a)
-B = int(b)
-C = int(c)</p>
-<dl class="last docutils">
-<dt>if abs(A-B) &lt; abs(B-C) and abs(A-B) &lt; abs(A-C) :</dt>
-<dd>return c</dd>
-<dt>elif abs(C-B) &lt; abs(A-C) and abs(C-B) &lt; abs(A-B) :</dt>
-<dd>return a</dd>
-<dt>else :</dt>
-<dd>return b</dd>
-</dl>
-</dd>
-</dl>
-<p>I = [None,None,None,None]
-I[1]= cv2.imread(&#8220;Image1.jpg&#8221;)
-I[2]= cv2.imread(&#8220;Image2.jpg&#8221;)
-I[3]= cv2.imread(&#8220;Image3.jpg&#8221;)</p>
-<p>rows = I[1].shape[0]
-cols = I[1].shape[1]
-res = np.zeros((rows,cols,3),np.uint8)</p>
-<dl class="docutils">
-<dt>for i in range(I[1].shape[0]):</dt>
-<dd><dl class="first last docutils">
-<dt>for j in range(I[1].shape[1]):</dt>
-<dd><dl class="first last docutils">
-<dt>for k in range(I[1].shape[2]):</dt>
-<dd>res[i][j][k] = far_away(I[1][i][j][k] , I[2][i][j][k] , I[3][i][j][k])</dd>
-</dl>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>cv2.imshow(&#8220;result&#8221;,res)
-cv2.imwrite(&#8220;Merged.jpg&#8221;,res)
-cv2.waitKey()</p>
-</div></blockquote>
+in different positions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">far_away</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">B</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">C</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">b</span>
+
+<span class="n">I</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">]</span>
+<span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;Image1.jpg&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;Image2.jpg&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;Image3.jpg&quot;</span><span class="p">)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">far_away</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">])</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;result&quot;</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">&quot;Merged.jpg&quot;</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">()</span>
+</pre></div>
+</div>
 <img alt="../../../_images/Image1.jpg" src="../../../_images/Image1.jpg" />
 <p>First Image</p>
 <img alt="../../../_images/Image2.jpg" src="../../../_images/Image2.jpg" />
@@ -138,6 +130,12 @@ with only two images.</p>
         </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "hargup";    var disqus_identifier = "2013/11/13/create_your_twin_brothers";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="../../../2014/01/12/cute_little_wonder.html">Cute little wonder</a>
+        </li><li>
+            <a href="../../12/30/how_to_talk_.html">How to talk?</a>
+        </li><li>
+            <a href="../../12/23/why_to_learn_history_.html">Why to learn history?</a>
+        </li><li>
             <a href="../../12/09/harris_corner_detection.html">Harris Corner Detection</a>
         </li><li>
             <a href="../../12/02/show_git_branch_in_bash_prompt.html">Show git branch in bash prompt</a>
@@ -151,8 +149,6 @@ with only two images.</p>
             <a href="../../09/21/code_browsing_with_vim.html">code browsing with vim</a>
         </li><li>
             <a href="../../09/09/plotting_graphs_with_python.html">Plotting parametric and polar functions with Python</a>
-        </li><li>
-            <a href="../../08/30/case_for_static_websites.html">Case for static websites</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox">
