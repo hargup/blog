@@ -87,6 +87,7 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ('/archive.html', 'Archives'),
         ('/categories/index.html', 'Tags'),
+        ('http://github.com/hargup/','Github'),
         ('/rss.xml', 'RSS'),
     ),
 }
@@ -130,8 +131,8 @@ NAVIGATION_LINKS = {
 #
 
 POSTS = (
-("posts/*.md", "posts", "post.tmpl"),
-("posts/*.txt", "posts", "post.tmpl"),
+("posts/*.md", "blog", "post.tmpl"),
+("posts/*.rst", "blog", "post.tmpl"),
 )
 PAGES = (
 ("stories/*.md", "stories", "story.tmpl"),
@@ -195,7 +196,7 @@ COMPILERS = {
 
 # Final location for the main blog page and sibling paginated pages is
 # output / TRANSLATION[lang] / INDEX_PATH / index-*.html
-# INDEX_PATH = ""
+# INDEX_PATH = "blog"
 
 # Create per-month archives instead of per-year
 # CREATE_MONTHLY_ARCHIVE = False
@@ -363,7 +364,7 @@ THEME = "ipython"
 # }
 
 # Show only teasers in the index pages? Defaults to False.
-# INDEX_TEASERS = False
+INDEX_TEASERS = True
 
 # A HTML fragment with the Read more... link.
 # The following tags exist and are replaced for you:
@@ -384,7 +385,7 @@ LICENSE = ""
 # src="http://i.creativecommons.org/l/by-nc-sa/2.5/ar/88x31.png"></a>"""
 
 # A small copyright notice for the page footer (in HTML).
-CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="" rel="nofollow"></a>         {license}'
+CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by Nikola <a href="" rel="nofollow"></a>         {license}'
 CONTENT_FOOTER = CONTENT_FOOTER.format(email=BLOG_EMAIL,
                                        author=BLOG_AUTHOR,
                                        date=time.gmtime().tm_year,
@@ -398,7 +399,7 @@ COMMENT_SYSTEM = "disqus"
 # depends on what comment system you use. The default is
 # "nikolademo" which is a test account for Disqus. More information
 # is in the manual.
-# COMMENT_SYSTEM_ID = "nikolademo"
+COMMENT_SYSTEM_ID = "hargup"
 
 # Enable annotations using annotateit.org?
 # If set to False, you can still enable them for individual posts and pages
@@ -508,7 +509,7 @@ DEPLOY_DRAFTS = False
 # """
 
 # Hide link to source for the posts?
-# HIDE_SOURCELINK = False
+HIDE_SOURCELINK = False
 # Copy the source files for your pages?
 # Setting it to False implies HIDE_SOURCELINK = True
 # COPY_SOURCES = True
@@ -619,7 +620,9 @@ RSS_TEASERS = True
 # FILE_METADATA_REGEXP = None
 
 # Additional metadata that is added to a post when creating a new_post
-# ADDITIONAL_METADATA = {}
+ADDITIONAL_METADATA = {
+        'author': 'Harsh Gupta'
+}
 
 # Nikola supports Twitter Card summaries / Open Graph.
 # Twitter cards make it possible for you to attach media to Tweets
@@ -668,12 +671,11 @@ TIMEZONE = 'Asia/Kolkata'
 # Experimental plugins - use at your own risk.
 # They probably need some manual adjustments - please see their respective
 # readme.
-# ENABLED_EXTRAS = [
-#     'planetoid',
-#     'ipynb',
-#     'local_search',
-#     'render_mustache',
-# ]
+ENABLED_EXTRAS = [
+    'ipynb',
+    'local_search',
+    'render_mustache',
+]
 
 # List of regular expressions, links matching them will always be considered
 # valid by "nikola check -l"
@@ -712,4 +714,3 @@ LOGGING_HANDLERS = {
 
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
-GLOBAL_CONTEXT = {}
