@@ -19,7 +19,7 @@ thing I'll have to do.
    singularity finder.
 
 You can look at the details in my
-[proposal](https://github.com/sympy/sympy/wiki/GSoC-2014-Application-Harsh-Gupta:-Solvers.)
+[proposal](https://github.com/sympy/sympy/wiki/GSoC-2014-Application-Harsh-Gupta:-Solvers)
 
 A started working on the sets module in the community bonding period, basically
 writing a set difference class at [this
