@@ -1,1 +1,0 @@
-/home/hargup/210fs/backup/sympy/week-6.md

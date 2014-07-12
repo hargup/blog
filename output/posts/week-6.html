@@ -25,7 +25,10 @@ article: http://ogp.me/ns/article#
     <meta name="author" content="Harsh Gupta">
             <meta name="og:title" content="week 6">
         <meta name="og:url" content="https://hargup.github.io/posts/week-6.html">
-            <meta name="og:description" content="Write your post here.">
+            <meta name="og:description" content="Solving Trigonometric Function (part II)
+There is another technique to solve trigonometric function. Just as every
+trigonometric function can be written in term of \( \tan \) it can also be written
+in">
         <meta name="og:site_name" content="Harsh's blog">
         <meta name="og:type" content="article">
 
@@ -93,7 +96,7 @@ article: http://ogp.me/ns/article#
 
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">Harsh Gupta</span></p>
-            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2014-07-02T15:22:17+05:30" itemprop="datePublished" title="Publication date">2014-07-02 15:22</time></a></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2014-07-02T14:13:01+05:30" itemprop="datePublished" title="Publication date">2014-07-02 14:13</time></a></p>
                 <p class="commentline">            <a href="week-6.html#disqus_thread" data-disqus-identifier="cache/posts/week-6.html">Comments</a>
 
 
@@ -103,14 +106,33 @@ article: http://ogp.me/ns/article#
     </header>
 
     <div class="e-content entry-content" itemprop="articleBody text">
-    Write your post here.
+    <h3>Solving Trigonometric Function (part II)</h3>
+<p>There is another technique to solve trigonometric function. Just as every
+trigonometric function can be written in term of \( \tan \) it can also be written
+in terms of \( \exp \).</p>
+<p>$$ sin(x) = - \frac{i}{2} \left(e^{i x} - e^{- i x}\right) $$
+$$ cos(x) = \frac{e^{i x}}{2} + \frac{1}{2} e^{- i x} $$
+$$ tan(x) = \frac{i \left(- e^{i x} + e^{- i x}\right)}{e^{i x} + e^{- i x}} $$
+$$ cot(x) = \frac{i \left(e^{i x} + e^{- i x}\right)}{e^{i x} - e^{- i x}} $$</p>
+<p>So, solving a trigonometric equation is equivalent to solving a rational
+function in \( \exp \). Note: here the \( \exp \) is in complex domain and
+equation \( exp(x) = y \) has solution
+\( \left\{i \left(2 \pi n + \arg{\left (y \right )}\right) + \log{\left (\left\lvert{y}\right\rvert \right )}\; |\; n \in \mathbb{Z}\right\} \)
+when solved for \( x \).</p>
     </div>
     <aside class="postpromonav">
     <nav>
-    
+            <ul itemprop="keywords" class="tags">
+           <li><a class="tag p-category" href="../categories/mathjax.html" rel="tag">mathjax</a></li>
+           <li><a class="tag p-category" href="../categories/sympy.html" rel="tag">sympy</a></li>
+        </ul>
+
             <ul class="pager">
             <li class="previous">
                 <a href="week-5.html" rel="prev" title="week 5">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="week-7.html" rel="next" title="week 7">Next post</a>
             </li>
         </ul>
 
